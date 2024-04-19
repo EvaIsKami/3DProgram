@@ -64,6 +64,14 @@ void Application::PreUpdate()
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
 void Application::Update()
 {
+	if (GetAsyncKeyState(VK_UP) & 0x8000)
+	{
+		z += 0.1f;
+	}
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	{
+		z -= 0.1f;
+	}
 }
 
 // ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
@@ -120,8 +128,12 @@ void Application::Draw()
 	// 陰影のあるオブジェクト(不透明な物体や2Dキャラ)はBeginとEndの間にまとめてDrawする
 	KdShaderManager::Instance().m_StandardShader.BeginLit();
 	{
-		Math::Matrix _mat = Math::Matrix::CreateTranslation(3, 0, 5);
+		static float y = 0;
+
+		Math::Matrix _mat = Math::Matrix::CreateTranslation(0, y, z);
 		KdShaderManager::Instance().m_StandardShader.DrawPolygon(*m_spPoly,_mat);
+
+		//y += 0.01f;
 	}
 	KdShaderManager::Instance().m_StandardShader.EndLit();
 

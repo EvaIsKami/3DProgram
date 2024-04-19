@@ -55,6 +55,8 @@ private:
 	//ポリゴンデータ
 	std::shared_ptr<KdSquarePolygon> m_spPoly = nullptr;
 
+	float z = 0.001f;
+
 	// ゲーム終了フラグ trueで終了する
 	bool		m_endFlag = false;
 
